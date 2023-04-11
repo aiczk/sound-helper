@@ -54,7 +54,7 @@ def main():
             chunk.channels = channel
 
             prefix_str = prefix if prefix == "" else prefix + "_"
-            output_path = os.path.join(output, f"{prefix_str}{os.path.splitext(os.path.basename(file_path))[0]}_{i}.{format}")
+            output_path = os.path.join(output, f"{prefix_str}{os.path.splitext(os.path.basename(file_path))[0]}_{i}_{j}.{format}")
             chunk.export(output_path, format=format)
     
     print("Done!")

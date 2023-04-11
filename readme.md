@@ -37,7 +37,7 @@ python sound.py --input ".\input" --output ".\output" --silence 200 --dbfs -40 -
 
 Output
 ```
-Prefix_FileName_SeparateNumber.Format
+Prefix_FileName_FileNumber_SeparateNumber.Format
 ```
 
 The bat file is optimized for DDSP-SVC. Rewrite it as necessary.
