@@ -51,7 +51,7 @@ Non-required arguments are set to 0.
 ### Example
 example:
 ```bat
-python sound.py --input ".\input" --output ".\output" --filename "sepalate" --silentlength 200 --silence -40 --skip 2 --samplerate 44100 --invert 1 --loudness -14.0 --channel 1 --prefix "invert" --pack 1
+python sound.py --input ".\input" --output ".\output" --filename "sepalate" --silencelength 200 --silence -40 --skip 2 --samplerate 44100 --invert 1 --loudness -14.0 --channel 1 --prefix "invert" --pack 1
 ```
 
 ## Thanks
