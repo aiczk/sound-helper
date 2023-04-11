@@ -22,8 +22,8 @@ parser.add_argument("--filename", type=str, default="audio", help="Output file n
 parser.add_argument("--iformat", type=str, default="wav", help="Input format(wav, mp3, etc...)")
 parser.add_argument("--oformat", type=str, default="wav", help="Output format(wav, mp3, etc...)")
 
-parser.add_argument("--silencelength", type=int, default=500, help="Silence length(ms)")
-parser.add_argument("--silence", type=int, default=-40, help="Silence threshold(dBFS)")
+parser.add_argument("--silence", type=int, default=500, help="Silence length(ms)")
+parser.add_argument("--threshold", type=int, default=-40, help="Silence threshold(dBFS)")
 parser.add_argument("--skip", type=float, default=0, help="Skip time(sec)")
 
 parser.add_argument("--samplerate", type=int, default=0, help="Sample rate(Hz)")
@@ -55,7 +55,7 @@ class sound:
     
     def run(self):
         for file_path in self.filelist:
-            for audio in split_on_silence(AudioSegment.from_file(file_path, format=args.iformat), min_silence_len = args.silencelength, silence_thresh = args.silence):
+            for audio in split_on_silence(AudioSegment.from_file(file_path, format=args.iformat), min_silence_len = args.silence, silence_thresh = args.threshold):
                 if not self.composite.check(audio): 
                     audio = self.composite.execute(audio)
         

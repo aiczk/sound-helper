@@ -1,6 +1,8 @@
 # Split Audio Files by Silence
 This script splits audio files based on the length of silence detected in them. 
+
 Audio files are split into chunks wherever there is silence for a period longer than the specified minimum silence length.
+
 The bat file is optimized for DDSP-SVC. Rewrite it as necessary.
 
 ## Dependencies
@@ -32,8 +34,8 @@ Non-required arguments are set to 0.
 #### Sound Setting
 |Argument|Description|Default|
 |--------|-----------|-------|
-|--silencelength|Minimum silence length (ms)|500|
-|--silence|Silence threshold (dBFS)|-40|
+|--silence|Minimum silence length (ms)|500|
+|--threshold|Silence threshold (dBFS)|-40|
 |--skip|Ignore files with less than the specified seconds (sec)|0.0|
 |--samplerate|Sample rate (Hz)|0|
 |--invert|Invert phase audio(0: false, 1: true)|0|
@@ -51,7 +53,7 @@ Non-required arguments are set to 0.
 ### Example
 example:
 ```bat
-python sound.py --input ".\input" --output ".\output" --filename "sepalate" --silencelength 200 --silence -40 --skip 2 --samplerate 44100 --invert 1 --loudness -14.0 --channel 1 --prefix "invert" --pack 1
+python sound.py --input ".\input" --output ".\output" --filename "sepalate" --silence 200 --threshold -40 --skip 2 --samplerate 44100 --invert 1 --loudness -14.0 --channel 1 --prefix "invert" --pack 1
 ```
 
 ## Thanks
