@@ -1,0 +1,1 @@
+python sound.py --input ".\input" --output ".\output" --silence 200 --dbfs -40 --skip 2 --samplerate 44100 --channel 1 --format "wav"&&pause
