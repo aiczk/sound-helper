@@ -1,1 +1,1 @@
-python sound.py --input ".\input" --output ".\output" --silence 200 --dbfs -40 --skip 2 --samplerate 44100 --invphase 0 --loudness -24.0 --channel 1 --format "wav" --prefix ""&&pause
+python sound.py --input ".\input" --output ".\output" --duration 200 --silence -40 --skip 2 --samplerate 44100 --invert 0 --loudness -14.0 --channel 0 --prefix "" --pack 1&&pause
