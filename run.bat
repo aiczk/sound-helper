@@ -1,1 +1,1 @@
-python sound.py --input ".\input" --output ".\output" --duration 200 --silence -40 --skip 2 --samplerate 44100 --invert 0 --loudness -14.0 --channel 0 --prefix "" --pack 1&&pause
+python sound.py --input ".\input" --output ".\output" --silencelength 200 --silence -40 --skip 2 --samplerate 44100 --invert 0 --loudness -14.0 --channel 0 --prefix "" --pack 1 &&pause

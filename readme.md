@@ -32,7 +32,7 @@ Non-required arguments are set to 0.
 #### Sound Setting
 |Argument|Description|Default|
 |--------|-----------|-------|
-|--duration|Minimum silence length (ms)|500|
+|--silencelength|Minimum silence length (ms)|500|
 |--silence|Silence threshold (dBFS)|-40|
 |--skip|Ignore files with less than the specified seconds (sec)|0.0|
 |--samplerate|Sample rate (Hz)|0|
@@ -51,7 +51,7 @@ Non-required arguments are set to 0.
 ### Example
 example:
 ```bat
-python sound.py --input ".\input" --output ".\output" --filename "sepalate" --duration 200 --silence -40 --skip 2 --samplerate 44100 --invert 1 --loudness -14.0 --channel 1 --prefix "invert" --pack 1
+python sound.py --input ".\input" --output ".\output" --filename "sepalate" --silentlength 200 --silence -40 --skip 2 --samplerate 44100 --invert 1 --loudness -14.0 --channel 1 --prefix "invert" --pack 1
 ```
 
 ## Thanks
