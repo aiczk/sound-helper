@@ -24,17 +24,17 @@ parser.add_argument("--oformat", type=str, default="wav", help="Output format(wa
 
 parser.add_argument("--silence", type=int, default=500, help="Silence length(ms)")
 parser.add_argument("--threshold", type=int, default=-40, help="Silence threshold(dBFS)")
-parser.add_argument("--skip", type=float, default=0, help="Skip time(sec)")
+parser.add_argument("--skip", type=float, help="Skip time(sec)")
 
-parser.add_argument("--samplerate", type=int, default=0, help="Sample rate(Hz)")
-parser.add_argument("--invert", type=bool, default=0, help="Invert phase audio(0: false, 1: true)")
-parser.add_argument("--loudness", type=float, default=0.0, help="Loudness normalization(dBFS)")
-parser.add_argument("--channel", type=int, default=0, help="Channel(0: pass, 1:mono, 2:stereo)")
-parser.add_argument("--lowpass", type=int, default=0, help="Lowpass filter(Hz)")
-parser.add_argument("--highpass", type=int, default=0, help="Highpass filter(Hz)")
+parser.add_argument("--samplerate", type=int, help="Sample rate(Hz)")
+parser.add_argument("--invert", type=int, help="Invert phase audio(0: false, 1: true)")
+parser.add_argument("--loudness", type=float, help="Loudness normalization(dBFS)")
+parser.add_argument("--channel", type=int, help="Channel(0: pass, 1:mono, 2:stereo)")
+parser.add_argument("--lowpass", type=int, help="Lowpass filter(Hz)")
+parser.add_argument("--highpass", type=int, help="Highpass filter(Hz)")
 
-parser.add_argument("--prefix", type=str, default=None, help="Prefix of output file name")
-parser.add_argument("--pack", type=bool, default=0, help="Pack output files(0: false, 1: true)")
+parser.add_argument("--prefix", type=str, help="Prefix of output file name")
+parser.add_argument("--pack", type=int, help="Pack output files(0: false, 1: true)")
 args = parser.parse_args()
 
 class sound:
@@ -43,15 +43,15 @@ class sound:
         self.filelist.sort()
 
         self.composite = composite()
-        self.composite.add_required_command(skip(0, args.skip))
-        self.composite.add_optional_command(sample_rate(0, args.samplerate))
-        self.composite.add_optional_command(channel(0, args.channel))
-        self.composite.add_optional_command(invert_phase(0, args.invert))
-        self.composite.add_optional_command(loudness_normalization(0, args.loudness))
-        self.composite.add_optional_command(lowpass(0, args.lowpass))
-        self.composite.add_optional_command(highpass(0, args.highpass))
-        self.composite.add_optional_command(pack(0, args.pack, args.output, args.oformat))
-        self.composite.add_required_command(export(0, args.filename, args.prefix, args.output, args.oformat))
+        self.composite.add_required_command(skip(args.skip))
+        self.composite.add_optional_command(sample_rate(args.samplerate))
+        self.composite.add_optional_command(channel(args.channel))
+        self.composite.add_optional_command(invert_phase(args.invert))
+        self.composite.add_optional_command(loudness_normalization(args.loudness))
+        self.composite.add_optional_command(lowpass(args.lowpass))
+        self.composite.add_optional_command(highpass(args.highpass))
+        self.composite.add_optional_command(pack(args.pack, args.output, args.oformat))
+        self.composite.add_required_command(export(args.filename, args.prefix, args.output, args.oformat))
     
     def run(self):
         for file_path in self.filelist:

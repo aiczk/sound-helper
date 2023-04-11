@@ -3,8 +3,8 @@ from pydub import AudioSegment
 import os
 
 class export(commands.command):
-    def __init__(self, default, value, prefix, output_path, output_format):
-        super().__init__(default, value)
+    def __init__(self, value, prefix, output_path, output_format):
+        super().__init__(value)
         self.audio = AudioSegment.empty()
         self.prefix = prefix
         self.output_path = output_path
