@@ -1,13 +1,13 @@
 import commands.core.command as commands
 from pydub import AudioSegment
 
-class composite:
+class composite(commands.command):
     def __init__(self):
         self.command_list = []
 
     def check(self, audio: AudioSegment):
         for command in self.command_list:
-            if not command.check(audio) and not command.is_default():
+            if not command.is_default() and not command.check(audio):
                 return False
         return True
 
@@ -20,6 +20,8 @@ class composite:
     
     def finalize(self):
         for command in self.command_list:
+            if command.is_default():
+                continue
             command.finalize()
 
     def add_optional_command(self, command: commands.command):

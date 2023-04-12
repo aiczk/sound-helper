@@ -10,7 +10,6 @@ class command:
     def check(self, audio: AudioSegment):
         return True
 
-    # TODO: change the second argument to a class with AudioSegment and file_path
     def execute(self, audio: AudioSegment):
         return audio
 

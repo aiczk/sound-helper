@@ -50,7 +50,7 @@ When LPF(lowpass) and HPF(highpass) are used together, they function as BPF(band
 ### Example
 example:
 ```bat
-python sound.py --filename "sepalate" --silence 200 --skip 2 --samplerate 44100 --invert 1 --reverse 1 --loudness -14.0 --pack 1 --prefix "rev_inv"
+python sound.py --filename "sepalate" --skip 2 --samplerate 44100 --invert 1 --reverse 1 --loudness -14 --pack 1 --highpass 80 --prefix "rev_inv_hps"
 ```
 
 ## Thanks
