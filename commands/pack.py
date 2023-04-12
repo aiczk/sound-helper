@@ -11,7 +11,7 @@ class pack(commands.command):
 
     def check(self, audio: AudioSegment):
         self.audio += audio
-        return True
+        return False
 
     def finalize(self):
         self.audio.export(os.path.join(self.output_path, f"pack.{self.output_format}"), format=self.output_format)
