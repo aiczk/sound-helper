@@ -1,5 +1,6 @@
 import argparse
 import os
+import tqdm
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from commands.core.composite import composite
@@ -57,13 +58,11 @@ class sound:
         self.composite.add_required_command(export(args.filename, args.prefix, args.output, args.oformat))
     
     def run(self):
-        for file_path in self.filelist:
+        for file_path in tqdm.tqdm(self.filelist):
             for audio in split_on_silence(AudioSegment.from_file(file_path, format=args.iformat), min_silence_len = args.silence, silence_thresh = args.threshold):
                 if self.composite.check(audio): 
                     audio = self.composite.execute(audio)
-        
         self.composite.finalize()
-        print("Done!")
 
 if __name__ == "__main__":
     main = sound()
