@@ -7,7 +7,7 @@ class composite:
 
     def check(self, audio: AudioSegment):
         for command in self.command_list:
-            if not command.check(audio):
+            if not command.check(audio) and not command.is_default():
                 return False
         return True
 

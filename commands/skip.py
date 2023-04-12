@@ -5,4 +5,6 @@ class skip(commands.command):
         super().__init__(value)
 
     def check(self, audio):
+        if self.is_default():
+            return True
         return audio.duration_seconds < self.value

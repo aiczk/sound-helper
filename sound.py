@@ -59,7 +59,7 @@ class sound:
     def run(self):
         for file_path in self.filelist:
             for audio in split_on_silence(AudioSegment.from_file(file_path, format=args.iformat), min_silence_len = args.silence, silence_thresh = args.threshold):
-                if not self.composite.check(audio): 
+                if self.composite.check(audio): 
                     audio = self.composite.execute(audio)
         
         self.composite.finalize()

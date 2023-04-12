@@ -8,10 +8,10 @@ class pack(commands.command):
         self.audio = AudioSegment.empty()
         self.output_path = output_path
         self.output_format = output_format
-
-    def check(self, audio: AudioSegment):
+    
+    def execute(self, audio: AudioSegment):
         self.audio += audio
-        return False
+        return audio
 
     def finalize(self):
         self.audio.export(os.path.join(self.output_path, f"pack.{self.output_format}"), format=self.output_format)
