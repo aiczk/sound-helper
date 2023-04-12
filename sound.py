@@ -12,6 +12,7 @@ from commands.highpass import highpass
 from commands.pack import pack
 from commands.skip import skip
 from commands.export import export
+from commands.reverse import reverse
 
 # TODO: REFACTORING
 
@@ -32,6 +33,7 @@ parser.add_argument("--loudness", type=float, help="Loudness normalization(dBFS)
 parser.add_argument("--channel", type=int, help="Channel(0: pass, 1:mono, 2:stereo)")
 parser.add_argument("--lowpass", type=int, help="Lowpass filter(Hz)")
 parser.add_argument("--highpass", type=int, help="Highpass filter(Hz)")
+parser.add_argument("--reverse", type=int, help="Reverse audio(0: false, 1: true)")
 
 parser.add_argument("--prefix", type=str, help="Prefix of output file name")
 parser.add_argument("--pack", type=int, help="Pack output files(0: false, 1: true)")
@@ -50,6 +52,7 @@ class sound:
         self.composite.add_optional_command(loudness_normalization(args.loudness))
         self.composite.add_optional_command(lowpass(args.lowpass))
         self.composite.add_optional_command(highpass(args.highpass))
+        self.composite.add_optional_command(reverse(args.reverse))
         self.composite.add_optional_command(pack(args.pack, args.output, args.oformat))
         self.composite.add_required_command(export(args.filename, args.prefix, args.output, args.oformat))
     

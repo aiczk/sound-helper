@@ -15,11 +15,6 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-
-```bat
-python split_audio_by_silence.py [--inputdir INPUTDIR] [--outputdir OUTPUTDIR] [--mintime MINTIME] [--dbfs DBFS] [--skip SKIP] [--samplerate SAMPLERATE] [--channel CHANNEL] [--format FORMAT]
-```
-
 ### Parameters
 Non-required arguments are set to 0.
 #### File Setting
@@ -43,6 +38,7 @@ Non-required arguments are set to 0.
 |--channel|Number of audio channels (0: pass, 1: mono, 2: stereo)|0|
 |--lowpass|Low pass filter(Hz)|0|
 |--highpass|High pass filter(Hz)|0|
+|--reverse|Reverse audio(0: false, 1: true)|0|
 
 #### Output Setting
 |Argument|Description|Default|
@@ -53,7 +49,7 @@ Non-required arguments are set to 0.
 ### Example
 example:
 ```bat
-python sound.py --input ".\input" --output ".\output" --filename "sepalate" --silence 200 --threshold -40 --skip 2 --samplerate 44100 --invert 1 --loudness -14.0 --channel 1 --prefix "invert" --pack 1
+python sound.py --input ".\input" --output ".\output" --filename "sepalate" --silence 200 --threshold -40 --skip 2 --samplerate 44100 --invert 1 --reverse 1 --loudness -14.0 --channel 1 --prefix "reverse_and_invert" --pack 1
 ```
 
 ## Thanks
