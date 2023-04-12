@@ -43,8 +43,6 @@ args = parser.parse_args()
 class sound:
     def __init__(self):
         self.filelist = [file for file in [os.path.join(args.input, x) for x in os.listdir(args.input) if not x.startswith(".")] if os.path.isfile(file)]
-        self.filelist.sort()
-
         self.composite = composite()
         self.composite.add_optional_command(skip(args.skip))
         self.composite.add_optional_command(sample_rate(args.samplerate))
