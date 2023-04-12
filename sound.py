@@ -17,8 +17,8 @@ from commands.reverse import reverse
 # TODO: REFACTORING
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--input", type=str, default=".\input", help="Input directory path")
-parser.add_argument("--output", type=str, default=".\output", help="Output directory path")
+parser.add_argument("--input", type=str, default="./input", help="Input directory path")
+parser.add_argument("--output", type=str, default="./output", help="Output directory path")
 parser.add_argument("--filename", type=str, default="audio", help="Output file name")
 parser.add_argument("--iformat", type=str, default="wav", help="Input format(wav, mp3, etc...)")
 parser.add_argument("--oformat", type=str, default="wav", help="Output format(wav, mp3, etc...)")
@@ -35,7 +35,7 @@ parser.add_argument("--lowpass", type=int, help="Lowpass filter(Hz)")
 parser.add_argument("--highpass", type=int, help="Highpass filter(Hz)")
 parser.add_argument("--reverse", type=int, help="Reverse audio(0: false, 1: true)")
 
-parser.add_argument("--prefix", type=str, help="Prefix of output file name")
+parser.add_argument("--prefix", type=str, default="", help="Prefix of output file name")
 parser.add_argument("--pack", type=int, help="Pack output files(0: false, 1: true)")
 args = parser.parse_args()
 

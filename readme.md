@@ -27,6 +27,7 @@ Non-required arguments are set to 0.
 |--oformat|Output file format (wav, mp3, etc.)|wav|
 
 #### Sound Setting
+When LPF(lowpass) and HPF(highpass) are used together, they function as BPF(bandpass) and BSF(bandstop).
 |Argument|Description|Default|
 |--------|-----------|-------|
 |--silence|Minimum silence length (ms)|500|
