@@ -5,7 +5,7 @@ class command:
         self.value = value
 
     def is_default(self):
-        return self.value == None
+        return self.value == 0 or self.value == None
     
     def check(self, audio: AudioSegment):
         return True
