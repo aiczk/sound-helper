@@ -13,6 +13,8 @@ class composite:
 
     def execute(self, audio: AudioSegment):
         for command in self.command_list:
+            if command.is_default():
+                continue
             audio = command.execute(audio)
         return audio
     

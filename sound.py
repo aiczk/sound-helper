@@ -35,7 +35,7 @@ parser.add_argument("--lowpass", type=int, help="Lowpass filter(Hz)")
 parser.add_argument("--highpass", type=int, help="Highpass filter(Hz)")
 parser.add_argument("--reverse", type=int, help="Reverse audio(0: false, 1: true)")
 
-parser.add_argument("--prefix", type=str, default="", help="Prefix of output file name")
+parser.add_argument("--prefix", type=str, help="Prefix of output file name")
 parser.add_argument("--pack", type=int, help="Pack output files(0: false, 1: true)")
 args = parser.parse_args()
 
@@ -45,7 +45,7 @@ class sound:
         self.filelist.sort()
 
         self.composite = composite()
-        self.composite.add_required_command(skip(args.skip))
+        self.composite.add_optional_command(skip(args.skip))
         self.composite.add_optional_command(sample_rate(args.samplerate))
         self.composite.add_optional_command(channel(args.channel))
         self.composite.add_optional_command(invert_phase(args.invert))

@@ -5,6 +5,4 @@ class reverse(commands.command):
         super().__init__(value)
 
     def execute(self, audio):
-        if self.value == None or self.value == 0:
-            return audio
         return audio.reverse()

@@ -6,7 +6,7 @@ class export(commands.command):
     def __init__(self, value, prefix, output_path, output_format):
         super().__init__(value)
         self.audio = AudioSegment.empty()
-        self.prefix = prefix
+        self.prefix = prefix or ""
         self.output_path = output_path
         self.output_format = output_format
         self.counter = 0
