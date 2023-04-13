@@ -14,10 +14,12 @@ class composite:
         self.add_optional_command(commands.highpass(args.highpass))
         self.add_optional_command(commands.reverse(args.reverse))
         self.add_optional_command(commands.pack(args.pack, args.output, args.oformat))
+        self.add_optional_command(commands.split(args.split))
+        self.add_optional_command(commands.merge(args.merge, args.output, args.oformat))
         self.add_required_command(commands.export(args.filename, args.prefix, args.output, args.oformat))
 
     def check(self, audio: AudioSegment):
-        return all([not command.is_default() and command.check(audio) for command in self.command_list])
+        return any(command.check(audio) for command in self.command_list)
 
     def execute(self, audio: AudioSegment):
         reduce(lambda audio, command: command.execute(audio) if not command.is_default() else audio, self.command_list, audio)

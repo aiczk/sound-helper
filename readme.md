@@ -36,7 +36,7 @@ When LPF(lowpass) and HPF(highpass) are used together, they function as BPF(band
 |--samplerate|Sample rate (Hz)|0|
 |--invert|Invert phase audio(0: false, 1: true)|0|
 |--loudness|Loudness normalization(dBFS)|0.0|
-|--channel|Number of audio channels (0: pass, 1: mono, 2: stereo)|0|
+|--channel|Number of audio channels(0: pass, 1: mono, 2: stereo)|0|
 |--lowpass|Low pass filter(Hz)|0|
 |--highpass|High pass filter(Hz)|0|
 |--reverse|Reverse audio(0: false, 1: true)|0|
@@ -45,12 +45,14 @@ When LPF(lowpass) and HPF(highpass) are used together, they function as BPF(band
 |Argument|Description|Default|
 |--------|-----------|-------|
 |--pack|Combine all output files(0: false, 1: true)|0|
+|--merge|Merge files under a certain number of seconds(sec)|0.0|
+|--split|Split files longer than a specified number of seconds(sec)|0.0|
 |--prefix|Prefix of output file name|None|
 
 ### Example
 example:
 ```bat
-python sound.py --filename "sepalate" --skip 2 --samplerate 44100 --invert 1 --reverse 1 --loudness -14 --pack 1 --highpass 80 --prefix "rev_inv_hps"
+python sound.py --filename "sepalate" --skip 2 --samplerate 44100 --invert 1 --reverse 1 --loudness -14 --pack 1 --highpass 80 --prefix --split 5.0 --merge 5.0 "rev_inv_hps"
 ```
 
 ## Thanks

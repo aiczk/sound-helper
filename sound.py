@@ -25,6 +25,8 @@ parser.add_argument("--highpass", type=int, help="Highpass filter(Hz)")
 parser.add_argument("--reverse", type=int, help="Reverse audio(0: false, 1: true)")
 
 parser.add_argument("--prefix", type=str, help="Prefix of output file name")
+parser.add_argument("--merge", type=float, help="Merge files under a certain number of seconds(sec)")
+parser.add_argument("--split", type=float, help="Split files longer than a specified number of seconds(sec)")
 parser.add_argument("--pack", type=int, help="Pack output files(0: false, 1: true)")
 args = parser.parse_args()
 
@@ -35,8 +37,9 @@ class sound:
     
     def run(self):
         for file_path in self.filelist:
-            for audio in tqdm(split_on_silence(AudioSegment.from_file(file_path, args.iformat), args.silence, args.threshold)):
-                if not self.composite.check(audio):
+            split_audio = sorted(split_on_silence(AudioSegment.from_file(file_path, args.iformat), args.silence, args.threshold), key=lambda x: x.duration_seconds)
+            for audio in tqdm(split_audio, desc=os.path.basename(file_path)):
+                if self.composite.check(audio):
                     continue
                 self.composite.execute(audio)
         self.composite.finalize()

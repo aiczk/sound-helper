@@ -9,6 +9,8 @@ from .pack import pack
 from .skip import skip
 from .export import export
 from .reverse import reverse
+from .split import split
+from .merge import merge
 
 __all__ = [
     "command",
@@ -22,4 +24,6 @@ __all__ = [
     "skip",
     "export",
     "reverse",
+    "split",
+    "merge",
 ]

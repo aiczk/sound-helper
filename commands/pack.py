@@ -14,4 +14,4 @@ class pack(commands.command):
         return audio
 
     def finalize(self):
-        self.audio.export(os.path.join(self.output_path, f"pack.{self.output_format}"), format=self.output_format)
+        self.audio.export(os.path.join(self.output_path, f"_pack.{self.output_format}"), format=self.output_format)

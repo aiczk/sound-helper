@@ -8,7 +8,7 @@ class command:
         return self.value == 0 or self.value == None
     
     def check(self, audio: AudioSegment):
-        return True
+        return False
 
     def execute(self, audio: AudioSegment):
         return audio
