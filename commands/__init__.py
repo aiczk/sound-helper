@@ -1,4 +1,4 @@
-from .core.composite import composite
+from .core.command import command
 from .sample_rate import sample_rate
 from .channel import channel
 from .invert_phase import invert_phase
@@ -11,7 +11,7 @@ from .export import export
 from .reverse import reverse
 
 __all__ = [
-    "composite",
+    "command",
     "sample_rate",
     "channel",
     "invert_phase",
