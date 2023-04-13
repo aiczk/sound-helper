@@ -1,19 +1,9 @@
 import argparse
 import os
-import tqdm
+from tqdm.auto import tqdm
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
-from commands.core.composite import composite
-from commands.sample_rate import sample_rate
-from commands.channel import channel
-from commands.invert_phase import invert_phase
-from commands.loudness_normalization import loudness_normalization
-from commands.lowpass import lowpass
-from commands.highpass import highpass
-from commands.pack import pack
-from commands.skip import skip
-from commands.export import export
-from commands.reverse import reverse
+from commands import *
 
 # TODO: REFACTORING
 
@@ -42,9 +32,7 @@ args = parser.parse_args()
 
 class sound:
     def __init__(self):
-        self.filelist = [file for file in [os.path.join(args.input, x) for x in os.listdir(args.input) if not x.startswith(".")] if os.path.isfile(file)]
-        self.filelist.sort()
-
+        self.filelist = [os.path.join(args.input, file) for file in os.listdir(args.input) if not file.startswith(".")]
         self.composite = composite()
         self.composite.add_optional_command(skip(args.skip))
         self.composite.add_optional_command(sample_rate(args.samplerate))
@@ -58,10 +46,11 @@ class sound:
         self.composite.add_required_command(export(args.filename, args.prefix, args.output, args.oformat))
     
     def run(self):
-        for file_path in tqdm.tqdm(self.filelist):
-            for audio in split_on_silence(AudioSegment.from_file(file_path, format=args.iformat), min_silence_len = args.silence, silence_thresh = args.threshold):
-                if self.composite.check(audio): 
-                    audio = self.composite.execute(audio)
+        for file_path in tqdm(self.filelist):
+            for audio in split_on_silence(AudioSegment.from_file(file_path, args.iformat), args.silence, args.threshold):
+                if not self.composite.check(audio):
+                    continue
+                audio = self.composite.execute(audio)
         self.composite.finalize()
 
 if __name__ == "__main__":
