@@ -1,5 +1,6 @@
 from functools import reduce
 from pydub import AudioSegment
+from typing import Union
 import commands
 
 class composite:
@@ -21,8 +22,8 @@ class composite:
     def check(self, audio: AudioSegment):
         return any(command.check(audio) for command in self.command_list)
 
-    def execute(self, audio: AudioSegment):
-        reduce(lambda audio, command: command.execute(audio) if not command.is_default() else audio, self.command_list, audio)
+    def execute(self, audio: Union[AudioSegment, list]):
+        return reduce(lambda audio, command: command.execute(audio) if not command.is_default() else audio, self.command_list, audio)
     
     def finalize(self):
         reduce(lambda _, command: command.finalize() if not command.is_default() else _, self.command_list, None)

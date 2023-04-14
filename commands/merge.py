@@ -23,8 +23,6 @@ class merge(commands.command):
         return result
     
     def finalize(self):
-        if self.cache.duration_seconds <= 0:
-            return
-        
-        print("An audio file was created that did not reach the specified number of seconds.")
-        self.cache.export(os.path.join(self.output_path, f"_merge(shortage).{self.output_format}"), format=self.output_format)
+        pass
+        # キャッシュの長さがvalue - valueの10%の範囲内であれば、そのまま出力する
+        #
