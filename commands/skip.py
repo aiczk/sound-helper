@@ -5,4 +5,4 @@ class skip(commands.command):
         super().__init__(value)
 
     def check(self, audio):
-        return audio.duration_seconds >= self.value
+        return audio.duration_seconds < self.value

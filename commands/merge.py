@@ -23,6 +23,4 @@ class merge(commands.command):
         return result
     
     def finalize(self):
-        pass
-        # キャッシュの長さがvalue - valueの10%の範囲内であれば、そのまま出力する
-        #
+        pass # Destroy the cache even if it remains
