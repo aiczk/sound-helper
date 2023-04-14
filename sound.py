@@ -26,7 +26,7 @@ parser.add_argument("--reverse", type=int, help="Reverse audio(0: false, 1: true
 
 parser.add_argument("--prefix", type=str, help="Prefix of output file name")
 parser.add_argument("--merge", type=float, help="Merge files under a certain number of seconds(ms)")
-#parser.add_argument("--split", type=float, help="Split files longer than a specified number of seconds(ms)")
+parser.add_argument("--split", type=float, help="Split files longer than a specified number of seconds(ms)")
 parser.add_argument("--pack", type=int, help="Pack output files(0: false, 1: true)")
 args = parser.parse_args()
 
