@@ -3,9 +3,7 @@ import os
 from tqdm.auto import tqdm
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
-from commands import *
-
-# TODO: REFACTORING
+from commands.core import composite as core
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--input", type=str, default="./input", help="Input directory path")
@@ -27,28 +25,21 @@ parser.add_argument("--highpass", type=int, help="Highpass filter(Hz)")
 parser.add_argument("--reverse", type=int, help="Reverse audio(0: false, 1: true)")
 
 parser.add_argument("--prefix", type=str, help="Prefix of output file name")
+parser.add_argument("--merge", type=float, help="Merge files under a certain number of seconds(ms)")
+#parser.add_argument("--split", type=float, help="Split files longer than a specified number of seconds(ms)")
 parser.add_argument("--pack", type=int, help="Pack output files(0: false, 1: true)")
 args = parser.parse_args()
 
 class sound:
     def __init__(self):
         self.filelist = [os.path.join(args.input, file) for file in os.listdir(args.input) if not file.startswith(".")]
-        self.composite = composite()
-        self.composite.add_optional_command(skip(args.skip))
-        self.composite.add_optional_command(sample_rate(args.samplerate))
-        self.composite.add_optional_command(channel(args.channel))
-        self.composite.add_optional_command(invert_phase(args.invert))
-        self.composite.add_optional_command(loudness_normalization(args.loudness))
-        self.composite.add_optional_command(lowpass(args.lowpass))
-        self.composite.add_optional_command(highpass(args.highpass))
-        self.composite.add_optional_command(reverse(args.reverse))
-        self.composite.add_optional_command(pack(args.pack, args.output, args.oformat))
-        self.composite.add_required_command(export(args.filename, args.prefix, args.output, args.oformat))
+        self.composite = core.composite(args)
     
     def run(self):
-        for file_path in tqdm(self.filelist):
-            for audio in split_on_silence(AudioSegment.from_file(file_path, args.iformat), args.silence, args.threshold):
-                if not self.composite.check(audio):
+        for file_path in self.filelist:
+            split_audio = sorted(split_on_silence(AudioSegment.from_file(file_path, args.iformat), args.silence, args.threshold), key=lambda x: x.duration_seconds)
+            for audio in tqdm(split_audio, desc=os.path.basename(file_path)):
+                if self.composite.check(audio):
                     continue
                 audio = self.composite.execute(audio)
         self.composite.finalize()
