@@ -46,7 +46,7 @@ When LPF(lowpass) and HPF(highpass) are used together, they function as BPF(band
 |--------|-----------|-------|
 |--pack|Combine all output files(0: false, 1: true)|0|
 |--merge|Merge files under a certain number of seconds(ms)|0|
-|--merge|Split files longer than a specified number of seconds(ms)|0|
+|--split|Split files longer than a specified number of seconds(ms)|0|
 |--prefix|Prefix of output file name|None|
 
 ### Example
