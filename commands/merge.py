@@ -10,10 +10,10 @@ class merge(commands.command):
         self.output_format = output_format
     
     def check(self, audio: AudioSegment):
-        if self.cache.duration_seconds >= self.value:
+        if len(self.cache) >= self.value:
             return False
         self.cache += audio
-        return self.cache.duration_seconds < self.value
+        return len(self.cache) < self.value
 
     def execute(self, audio: AudioSegment):
         if self.check(audio):

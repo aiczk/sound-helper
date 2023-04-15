@@ -14,6 +14,7 @@ class export(commands.command):
 
     def execute(self, audio: Union[AudioSegment, list]):
         if isinstance(audio, list):
+            print(len(audio))
             for a in audio:
                 self.export(a)
             return None
