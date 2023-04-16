@@ -16,7 +16,7 @@ class composite:
         self.add_optional_command(commands.lowpass(args.lowpass))
         self.add_optional_command(commands.highpass(args.highpass))
         self.add_optional_command(commands.reverse(args.reverse))
-        self.add_optional_command(commands.pack(args.pack, args.output, args.oformat))
+        self.add_optional_command(commands.combine(args.combine, args.output, args.oformat))
         self.add_required_command(commands.export(args.filename, args.prefix, args.output, args.oformat))
 
     def check(self, audio: AudioSegment):
