@@ -5,4 +5,4 @@ class loudness_normalization(commands.command):
         super().__init__(value)
 
     def execute(self, audio):
-        return audio.apply_gain(self.value - audio.dBFS)
+        return self.action(audio, lambda audio: audio.apply_gain(self.value - audio.dBFS))

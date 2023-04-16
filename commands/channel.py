@@ -5,4 +5,4 @@ class channel(commands.command):
         super().__init__(value)
 
     def execute(self, audio):
-        return audio.set_channels(self.value)
+        return self.action(audio, lambda audio: audio.set_channels(self.value))

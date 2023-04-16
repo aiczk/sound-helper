@@ -5,4 +5,4 @@ class invert_phase(commands.command):
         super().__init__(value)
 
     def execute(self, audio):
-        return audio.invert_phase()
+        return self.action(audio, lambda audio: audio.invert_phase())

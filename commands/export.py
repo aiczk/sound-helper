@@ -1,6 +1,5 @@
 import commands.core.command as commands
 from pydub import AudioSegment
-from typing import Union
 import os
 
 class export(commands.command):
@@ -12,14 +11,8 @@ class export(commands.command):
         self.output_format = output_format
         self.counter = 0
 
-    def execute(self, audio: Union[AudioSegment, list]):
-        if isinstance(audio, list):
-            print(len(audio))
-            for a in audio:
-                self.export(a)
-            return None
-        return self.export(audio)
-
+    def execute(self, audio):
+        return self.action(audio, lambda audio: self.export(audio))
     
     def export(self, audio: AudioSegment):
         self.counter += 1

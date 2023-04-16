@@ -7,6 +7,8 @@ class composite:
     def __init__(self, args):
         self.command_list = []
         self.add_optional_command(commands.skip(args.skip))
+        self.add_optional_command(commands.merge(args.merge, args.output, args.oformat))
+        self.add_optional_command(commands.split(args.split))
         self.add_optional_command(commands.sample_rate(args.samplerate))
         self.add_optional_command(commands.channel(args.channel))
         self.add_optional_command(commands.invert_phase(args.invert))
@@ -15,8 +17,6 @@ class composite:
         self.add_optional_command(commands.highpass(args.highpass))
         self.add_optional_command(commands.reverse(args.reverse))
         self.add_optional_command(commands.pack(args.pack, args.output, args.oformat))
-        self.add_optional_command(commands.merge(args.merge, args.output, args.oformat))
-        self.add_optional_command(commands.split(args.split))
         self.add_required_command(commands.export(args.filename, args.prefix, args.output, args.oformat))
 
     def check(self, audio: AudioSegment):
