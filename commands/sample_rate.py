@@ -5,4 +5,4 @@ class sample_rate(commands.command):
         super().__init__(value)
 
     def execute(self, audio):
-        return audio.set_frame_rate(self.value)
+        return self.action(audio, lambda audio: audio.set_frame_rate(self.value))

@@ -5,4 +5,4 @@ class lowpass(commands.command):
         super().__init__(value)
 
     def execute(self, audio):
-        return audio.low_pass_filter(self.value)
+        return self.action(audio, lambda audio: audio.low_pass_filter(self.value))

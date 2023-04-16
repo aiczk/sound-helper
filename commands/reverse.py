@@ -5,4 +5,4 @@ class reverse(commands.command):
         super().__init__(value)
 
     def execute(self, audio):
-        return audio.reverse()
+        return self.action(audio, lambda audio: audio.reverse())
