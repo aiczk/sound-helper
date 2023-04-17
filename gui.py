@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import subprocess, os
+import subprocess, threading, os, signal, re
 
 class sound_gui:
     def __init__(self):
@@ -10,24 +10,18 @@ class sound_gui:
             event, value = window.read()
             if event == sg.WIN_CLOSED:
                 break
-
+            
             if event == 'start':
-                self.run_cmd(f'python sound.py {self.parse_args(value)}', window)
-                print("Process Finished")
-                continue
+                window['status'].update('Status: Running.')
+                self.stop_event = threading.Event()
+                threading.Thread(target=self.run_cmd, args=(f'python sound.py {self.parse_args(value)}', window, self.stop_event)).start()
+
             if event == 'stop':
-                self.process.terminate()
-                print("Process killed.")
-                continue
-
-        self.process.terminate()
+                window['status'].update('Status: Stopped.')
+                self.stop_event.set()
+        
+        self.stop_event.set()
         window.close()
-
-    def run_cmd(self, cmd, window):
-        self.process = subprocess.Popen(cmd, shell = True, stdout = subprocess.PIPE, stderr = subprocess.STDOUT, preexec_fn=os.setsid)
-        for line in self.process.stdout:
-            print(line.decode('utf-8').strip('\n'), end='\r')
-            window.Refresh()
 
     def layout(self) -> list:
         return [
@@ -86,9 +80,23 @@ class sound_gui:
                     ])
                 ],
             ],
-            [sg.Button('Start', key='start'), sg.Button('Stop', key='stop')],
-            [sg.Output(size=(76, 2), sbar_relief=sg.RELIEF_SUNKEN)]
+            [sg.Button('(Re)Start', key='start'), sg.Button('Stop', key='stop'), sg.Text('Status: Stopped.', key='status')],
+            [sg.Output(size=(76, 2), key='output')]
         ]
+    
+    def run_cmd(self, cmd, window, stop_event):
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, start_new_session=True)
+        while not stop_event.is_set():
+            line = process.stdout.readline()
+            if line == b'' and process.poll() is not None:
+                break
+            if line:
+                window['output'].update('')
+                print(re.sub(r'^[^#\]]*[\]]', "Current Status:\n", line.decode('utf-8').strip('\n')), end='\r')
+                window.Refresh()
+        
+        os.kill(process.pid, signal.SIGTERM)
+        process.wait()
     
     def parse_args(self, value: dict) -> str:
         args = ''
@@ -107,10 +115,10 @@ class sound_gui:
         args += f'--skip {value["skip"]} ' if value['skip'] else ''
         args += f'--merge {value["merge"]} ' if value['merge'] else ''
         args += f'--split {value["split"]} ' if value['split'] else ''
-        args += '--combine 1 ' if value['combine'] else '--combine 0 '
-        args += '--reverse 1 ' if value['reverse'] else '--reverse 0 '
-        args += '--invert 1 ' if value['invert'] else '--invert 0 '
-        args += '--channel 1 ' if value['mono'] else '--channel 2 ' if value['stereo'] else '--channel 0 '
+        args += '--combine 1 ' if value['combine'] else ''
+        args += '--reverse 1 ' if value['reverse'] else ''
+        args += '--invert 1 ' if value['invert'] else ''
+        args += '--channel 1 ' if value['mono'] else '--channel 2 ' if value['stereo'] else ''
         return args
         
 
