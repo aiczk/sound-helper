@@ -15,6 +15,9 @@ class export(commands.command):
         return self.action(audio, lambda audio: self.export(audio))
     
     def export(self, audio: AudioSegment):
+        if audio is None:
+            return
+
         self.counter += 1
         prefix_str = self.prefix if self.prefix == "" else self.prefix + "_"
         file_name = f"{prefix_str}{self.value}_{self.counter}.{self.output_format}"

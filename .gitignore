@@ -1,3 +1,6 @@
 !.gitignore
 /ffmpeg-master-latest-win64-gpl-shared
 /**/__pycache__
+/build
+/dist
+/*.spec

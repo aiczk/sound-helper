@@ -1,3 +1,5 @@
 pydub
 librosa
 tqdm
+pysimplegui
+rx

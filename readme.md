@@ -32,7 +32,6 @@ When LPF(lowpass) and HPF(highpass) are used together, they function as BPF(band
 |--------|-----------|-------|
 |--silence|Minimum silence length (ms)|500|
 |--threshold|Silence threshold (dBFS)|-40|
-|--skip|Ignore files with less than the specified seconds (sec)|0.0|
 |--samplerate|Sample rate (Hz)|0|
 |--invert|Invert phase audio(0: false, 1: true)|0|
 |--loudness|Loudness normalization(dBFS)|0.0|
@@ -44,7 +43,8 @@ When LPF(lowpass) and HPF(highpass) are used together, they function as BPF(band
 #### Output Setting
 |Argument|Description|Default|
 |--------|-----------|-------|
-|--pack|Combine all output files(0: false, 1: true)|0|
+|--combine|Combine all output files(0: false, 1: true)|0|
+|--skip|Ignore files with less than the specified seconds (ms)|0|
 |--merge|Merge files under a certain number of seconds(ms)|0|
 |--split|Split files longer than a specified number of seconds(ms)|0|
 |--prefix|Prefix of output file name|None|

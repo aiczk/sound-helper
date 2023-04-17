@@ -5,7 +5,7 @@ from .invert_phase import invert_phase
 from .loudness_normalization import loudness_normalization
 from .lowpass import lowpass
 from .highpass import highpass
-from .pack import pack
+from .combine import combine
 from .skip import skip
 from .export import export
 from .reverse import reverse
@@ -20,7 +20,7 @@ __all__ = [
     "loudness_normalization",
     "lowpass",
     "highpass",
-    "pack",
+    "combine",
     "skip",
     "export",
     "reverse",
