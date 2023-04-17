@@ -9,7 +9,6 @@ class combine(commands.command):
         self.output_path = output_path
         self.output_format = output_format
     
-    # audioはAudioSegment型か、list型のAudioSegment型の要素を持つ
     def execute(self, audio):
         if isinstance(audio, list):
             for a in audio:
