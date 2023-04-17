@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import subprocess, threading, os, signal, re
+import i18n
 
 class sound_gui:
     def __init__(self):
@@ -72,10 +73,10 @@ class sound_gui:
     def layout(self) -> list:
         return [
             [
-                sg.Frame('Directory Setting', 
+                sg.Frame(i18n('Directory Setting'), 
                 [
-                    [sg.Text('Input directory:   '), sg.InputText(key='input_dir'), sg.FolderBrowse()],
-                    [sg.Text('Output directory:'), sg.InputText(key='output_dir'), sg.FolderBrowse()]
+                    [sg.Text(i18n('Input directory:')), sg.InputText(key='input_dir'), sg.FolderBrowse()],
+                    [sg.Text(i18n('Output directory:')), sg.InputText(key='output_dir'), sg.FolderBrowse()]
                 ])
             ],
             [
@@ -83,55 +84,57 @@ class sound_gui:
                     sg.Frame('File Setting',
                     [
                         [
-                            sg.Text('Input file format:'), sg.Combo(['wav','mp3'], default_value='wav', key='iformat'),
-                            sg.Text('Output file format:'), sg.Combo(['wav','mp3'], default_value='wav', key='oformat')
+                            sg.Text(i18n('Input file format:')), sg.Combo(['wav','mp3'], default_value='wav', key='iformat'),
+                            sg.Text(i18n('Output file format:')), sg.Combo(['wav','mp3'], default_value='wav', key='oformat')
                         ],
                         [
-                            sg.Text('File prefix:'), sg.InputText(size=(20, 50), key='prefix'), 
-                            sg.Text('File name:'), sg.InputText(size=(20, 50), key='filename')
-                        ],
-                    ])
-                ],
-                [
-                    sg.Frame('Silence Setting',
-                    [
-                        [
-                            sg.Text('Silence length:'), sg.InputText(size=(5, 50), default_text=200, key='silence'), sg.Text('ms'),
-                            sg.Text('Silence threshold:'), sg.InputText(size=(5, 50), default_text=-40, key='threshold'), sg.Text('ms')
+                            sg.Text(i18n('File prefix:')), sg.InputText(size=(20, 50), key='prefix'), 
+                            sg.Text(i18n('File name:')), sg.InputText(size=(20, 50), key='filename')
                         ],
                     ])
                 ],
                 [
-                    sg.Frame('Optional Setting',
+                    sg.Frame(i18n('Silence Setting'),
                     [
                         [
-                            sg.Text('Sample rate:'), sg.InputText(size=(5, 50), default_text=44100, key='sample_rate'), sg.Text('Hz'), 
-                            sg.Radio('Mono', 'channel', key='mono'), sg.Radio('Stereo', 'channel', key='stereo')
+                            sg.Text(i18n('Silence length:')), sg.InputText(size=(5, 50), default_text=200, key='silence'), sg.Text('ms'),
+                            sg.Text(i18n('Silence threshold:')), sg.InputText(size=(5, 50), default_text=-40, key='threshold'), sg.Text('dB')
                         ],
-                        [sg.Text('Loudness normalization:'), sg.InputText(size=(5, 50), default_text=-14, key='loudness'), sg.Text('dB'),],
+                    ])
+                ],
+                [
+                    sg.Frame(i18n('Optional Setting'),
+                    [
                         [
-                            sg.Text('High pass:'), sg.InputText(size=(5, 50), key='highpass'), sg.Text('Hz'),
-                            sg.Text('Low pass:'), sg.InputText(size=(5, 50), key='lowpass'), sg.Text('Hz')
+                            sg.Text(i18n('Sample rate:')), sg.InputText(size=(5, 50), default_text=44100, key='sample_rate'), sg.Text('Hz'), 
+                            sg.Radio(i18n('Mono'), 'channel', key='mono'), 
+                            sg.Radio(i18n('Stereo'), 'channel', key='stereo')
+                        ],
+                        [sg.Text(i18n('Loudness normalization:')), sg.InputText(size=(5, 50), default_text=-14, key='loudness'), sg.Text('dB'),],
+                        [
+                            sg.Text(i18n('High pass:')), sg.InputText(size=(5, 50), key='highpass'), sg.Text('Hz'),
+                            sg.Text(i18n('Low pass:')), sg.InputText(size=(5, 50), key='lowpass'), sg.Text('Hz')
                         ],
                         [
-                            sg.Text('Skip less than'), sg.InputText(size=(5, 50), default_text=1000, key='skip'), sg.Text('ms'),
-                            sg.Text('Merge less than'), sg.InputText(size=(5, 50), default_text=5000, key='merge'), sg.Text('ms'),
-                            sg.Text('Split more than'), sg.InputText(size=(5, 50), default_text=10000, key='split'), sg.Text('ms'),
+                            sg.Text(i18n('Skip less than')), sg.InputText(size=(5, 50), default_text=1000, key='skip'), sg.Text(i18n('ms skip')),
+                            sg.Text(i18n('Merge less than')), sg.InputText(size=(5, 50), default_text=5000, key='merge'), sg.Text(i18n('ms merge')),
+                            sg.Text(i18n('Split more than')), sg.InputText(size=(5, 50), default_text=10000, key='split'), sg.Text(i18n('ms split'))
                         ],
                         [
-                            sg.Checkbox('Invert phase', key='invert'),
-                            sg.Checkbox('Reverse audio', key='reverse'),
-                            sg.Checkbox('Combine all', key='combine'),
+                            sg.Checkbox(i18n('Invert phase'), key='invert'),
+                            sg.Checkbox(i18n('Reverse audio'), key='reverse'),
+                            sg.Checkbox(i18n('Combine all'), key='combine'),
                         ]
                     ])
                 ],
             ],
             [sg.Button('(Re)Start', key='start'), sg.Button('Stop', key='stop')],
-            [sg.Output(size=(76, 2), key='output')]
+            [sg.Output(size=(76, 2), key='output', expand_x=True)]
         ]
     
 
         
 
 if __name__ == '__main__':
+    i18n = i18n.I18nAuto()
     gui = sound_gui()
