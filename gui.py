@@ -81,7 +81,7 @@ class sound_gui:
             ],
             [
                 [
-                    sg.Frame('File Setting',
+                    sg.Frame(i18n('File Setting'),
                     [
                         [
                             sg.Text(i18n('Input file format:')), sg.Combo(['wav','mp3'], default_value='wav', key='iformat'),
