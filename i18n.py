@@ -44,7 +44,7 @@ LANGUAGE_ALL = {
         'Output file format:': '出力ファイルフォーマット:',
         'File prefix:': 'ファイルの接頭辞:',
         'File name:': 'ファイル名:',
-        'Silence Setting': '無音設定',
+        'Silence Setting': 'ファイル分割設定',
         'Silence length:': '無音の長さ:',
         'Silence threshold:': '無音のしきい値:',
         'Optional Setting': 'オプション設定',
