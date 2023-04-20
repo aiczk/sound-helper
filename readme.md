@@ -7,6 +7,10 @@ The bat file is optimized for DDSP-SVC. Rewrite it as necessary.
 
 ## Dependencies
 
+### GUI
+Install the top version from [here](https://github.com/aiczk/sound-helper/tags).
+
+### CUI and GUI
 1. At first, install ffmpeg from the [official website](https://ffmpeg.org/).
 2. Register the ffmpeg bin directory in the environment variable.
 3. Install what you need using pip:

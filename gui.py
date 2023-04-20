@@ -4,7 +4,7 @@ import i18n
 
 class sound_gui:
     def __init__(self):
-        sg.theme('DarkAmber')
+        sg.theme('DarkBlue3')
         window = sg.Window('sound-helper by aiczk', self.layout())
 
         while True:
@@ -12,7 +12,6 @@ class sound_gui:
             if event == sg.WIN_CLOSED:
                 break
             
-            # stop_eventがあればset()してから初期化する
             if event == 'start':
                 if hasattr(self, 'stop_event'):
                     self.stop_event.set()
@@ -25,7 +24,9 @@ class sound_gui:
                 if hasattr(self, 'stop_event') and not self.stop_event.is_set():
                     self.stop_event.set()
         
-        self.stop_event.set()
+        if hasattr(self, 'stop_event'):
+            self.stop_event.set()
+        
         window.close()
 
     def execute_command(self, cmd, window, stop_event):
@@ -81,7 +82,7 @@ class sound_gui:
             ],
             [
                 [
-                    sg.Frame('File Setting',
+                    sg.Frame(i18n('File Setting'),
                     [
                         [
                             sg.Text(i18n('Input file format:')), sg.Combo(['wav','mp3'], default_value='wav', key='iformat'),
