@@ -2,7 +2,7 @@
 sound-helper(GUI)を使うまでの準備についての解説
 ## 下準備
 ### 1. Source.zipのダウンロード
-[こちら](https://github.com/aiczk/sound-helper/releases/tag/v1.0)のAssets下にある**Source Code**をクリックしてダウンロード後、解凍しましょう。
+[こちら](https://github.com/aiczk/sound-helper)のCode下にある**Download ZIP**をクリックしてダウンロード後、解凍しましょう。
 
 ### 2. Pythonのインストール
 [こちら](https://prog-8.com/docs/python-env-win)のサイトに記載されている通りにPythonをインストールします。
