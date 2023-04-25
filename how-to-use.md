@@ -13,6 +13,12 @@ sound-helper(GUI)を使うまでの準備についての解説
 コマンドプロンプトで**必ず**`ffmpeg`を実行し、下記画像のような文章が出てくることを確認したら下準備は完了です。
 ![ffmpeg](https://cdn-ak.f.st-hatena.com/images/fotolife/r/rikoubou/20191107/20191107144324.png)
 
+### 3. pip -r requirement.txtの実行
+解凍済したSource.zip内で**フォルダーの空いているところを**右クリックし、`ターミナルで開く(T)`を実行しましょう。
+コマンドプロンプトが開きましたら`pip install -r requirements.txt`を実行しましょう。
+#### エラーが出てインストールができない場合
+`pip install --upgrade pip`または`pip3 install --upgrade pip`を実行し、pipをアップグレードしてみてください。
+
 ## GUIの表示
 下準備おつかれさまでした。
 `run-gui.bat`を実行しましょう。
